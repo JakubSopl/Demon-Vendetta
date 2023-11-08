@@ -5,10 +5,14 @@ using static scr_Models;
 
 public class src_CharacterController : MonoBehaviour
 {
+    [Header("Weapon")]
+    public WeaponController currentWeapon;
+
     private CharacterController characterController;
     private DefaultInput defaultInput;
     private Vector2 input_Movement;
-    private Vector2 input_View;
+    [HideInInspector]
+    public Vector2 input_View;
 
     private Vector3 newCameraRotation;
     private Vector3 newCharacterRotation;
@@ -74,6 +78,11 @@ public class src_CharacterController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
 
         cameraHeight = cameraHolder.localPosition.y;
+
+        if (currentWeapon)
+        {
+            currentWeapon.Initialise(this);
+        }
     }
 
     private void Update()
@@ -83,7 +92,6 @@ public class src_CharacterController : MonoBehaviour
         CalculateJump();
         CalculateStance();
 
-       
     }
 
     private void CalculateView()
