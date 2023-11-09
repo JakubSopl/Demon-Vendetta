@@ -5,6 +5,9 @@ public class WeaponController : MonoBehaviour
 {
     private src_CharacterController characterController;
 
+    [Header("References")]
+    public Animator weaponAnimator;
+
     [Header("Settings")]
     public WeaponSettingsModel settings;
 
@@ -21,6 +24,10 @@ public class WeaponController : MonoBehaviour
 
     Vector3 targetWeaponMovementRotation;
     Vector3 targetWeaponMovementRotationVelocity;
+
+    private bool isGroundedTrigger;
+
+    public float fallingDelay;
 
     private void Start()
     {
@@ -40,6 +47,19 @@ public class WeaponController : MonoBehaviour
             return;
         }
 
+        CalculateWeaponRotation();
+        SetWeaponAnimations();
+
+    }
+
+    public void TriggerJump()
+    {
+        isGroundedTrigger = false;
+        weaponAnimator.SetTrigger("Jump");
+    }
+
+    private void CalculateWeaponRotation()
+    {
         targetWeaponRotation.y += settings.SwayAmount * (settings.SwayXInverted ? -characterController.input_View.x : characterController.input_View.x) * Time.deltaTime;
         targetWeaponRotation.x += settings.SwayAmount * (settings.SwayYInverted ? characterController.input_View.y : -characterController.input_View.y) * Time.deltaTime;
 
@@ -57,7 +77,34 @@ public class WeaponController : MonoBehaviour
         newWeaponMovementRotation = Vector3.SmoothDamp(newWeaponMovementRotation, targetWeaponMovementRotation, ref newWeaponMovementRotationVelocity, settings.MovementSwaySmoothing);
 
         transform.localRotation = Quaternion.Euler(newWeaponRotation + newWeaponMovementRotation);
-
     }
+
+    private void SetWeaponAnimations()
+    {
+        if (isGroundedTrigger)
+        {
+            fallingDelay = 0;
+        }
+        else
+        {
+            fallingDelay += Time.deltaTime;
+        }
+
+        if (characterController.isGrounded && !isGroundedTrigger && fallingDelay > 0.1f)
+        {
+            weaponAnimator.SetTrigger("Land");
+            isGroundedTrigger = true;
+        }
+
+        if (!characterController.isGrounded && isGroundedTrigger)
+        {
+            weaponAnimator.SetTrigger("Falling");
+            isGroundedTrigger = false;
+        }
+
+        weaponAnimator.SetBool("isSprinting", characterController.isSprinting);
+        weaponAnimator.SetFloat("WeaponAnimationSpeed", characterController.weaponAnimationSpeed);
+    }
+
 }
  
