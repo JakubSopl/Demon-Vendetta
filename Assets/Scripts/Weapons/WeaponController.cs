@@ -16,6 +16,12 @@ public class WeaponController : MonoBehaviour
     Vector3 targetWeaponRotation;
     Vector3 targetWeaponRotationVelocity;
 
+    Vector3 newWeaponMovementRotation;
+    Vector3 newWeaponMovementRotationVelocity;
+
+    Vector3 targetWeaponMovementRotation;
+    Vector3 targetWeaponMovementRotationVelocity;
+
     private void Start()
     {
         newWeaponRotation = transform.localRotation.eulerAngles;
@@ -39,11 +45,19 @@ public class WeaponController : MonoBehaviour
 
         targetWeaponRotation.x = Mathf.Clamp(targetWeaponRotation.x, -settings.SwayClampX, settings.SwayClampY);
         targetWeaponRotation.y = Mathf.Clamp(targetWeaponRotation.x, -settings.SwayClampX, settings.SwayClampY);
+        targetWeaponRotation.z = targetWeaponRotation.y;
 
         targetWeaponRotation = Vector3.SmoothDamp(targetWeaponRotation, Vector3.zero, ref targetWeaponRotationVelocity, settings.SwayResetSmoothing);
         newWeaponRotation = Vector3.SmoothDamp(newWeaponRotation, targetWeaponRotation, ref newWeaponRotationVelocity, settings.SwaySmoothing);
 
-        transform.localRotation = Quaternion.Euler(newWeaponRotation);
+        targetWeaponMovementRotation.z = settings.MovementSwayX * (settings.MovementSwayXInverted ? -characterController.input_Movement.x : characterController.input_Movement.x);
+        targetWeaponMovementRotation.x = settings.MovementSwayY * (settings.MovementSwayYInverted ? -characterController.input_Movement.y : characterController.input_Movement.y);
+
+        targetWeaponMovementRotation = Vector3.SmoothDamp(targetWeaponMovementRotation, Vector3.zero, ref targetWeaponMovementRotationVelocity, settings.MovementSwaySmoothing);
+        newWeaponMovementRotation = Vector3.SmoothDamp(newWeaponMovementRotation, targetWeaponMovementRotation, ref newWeaponMovementRotationVelocity, settings.MovementSwaySmoothing);
+
+        transform.localRotation = Quaternion.Euler(newWeaponRotation + newWeaponMovementRotation);
 
     }
 }
+ 
