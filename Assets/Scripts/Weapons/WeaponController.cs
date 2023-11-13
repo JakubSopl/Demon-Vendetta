@@ -40,6 +40,17 @@ public class WeaponController : MonoBehaviour
     private float swayTime;
     private Vector3 swayPosition;
 
+    [Header("Sights")]
+    public Transform sightTarget;
+    public float sightOffset;
+    public float aimingInTime;
+    private Vector3 weaponSwayPosition;
+    private Vector3 weaponSwayPositionVelocity;
+
+    [HideInInspector]
+    public bool isAimingIn;
+
+
     private void Start()
     {
         newWeaponRotation = transform.localRotation.eulerAngles;
@@ -61,6 +72,22 @@ public class WeaponController : MonoBehaviour
         CalculateWeaponRotation();
         SetWeaponAnimations();
         CalculateWeaponSway();
+        CalculateAimingIn();
+    }
+
+    private void CalculateAimingIn()
+    {
+        var targetPosition = transform.position;
+
+        if (isAimingIn)
+        {
+            targetPosition = characterController.cameraHolder.transform.position + (weaponSwayObject.transform.position - sightTarget.transform.position) + (characterController.cameraHolder.transform.forward * sightOffset);
+        }
+
+        //weaponSwayPosition = weaponSwayObject.transform.position;
+        weaponSwayPosition = Vector3.SmoothDamp(weaponSwayPosition, targetPosition, ref weaponSwayPositionVelocity, aimingInTime);
+        weaponSwayObject.transform.position = weaponSwayPosition;
+
     }
 
     public void TriggerJump()
