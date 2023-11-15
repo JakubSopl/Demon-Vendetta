@@ -5,6 +5,7 @@ using static scr_Models;
 
 public class src_CharacterController : MonoBehaviour
 {
+    private WeaponController weaponController;
 
     private CharacterController characterController;
     private DefaultInput defaultInput;
@@ -18,6 +19,7 @@ public class src_CharacterController : MonoBehaviour
 
     [Header("References")]
     public Transform cameraHolder;
+    public new Transform camera;
     public Transform feetTransform;
 
     [Header("Settings")]
@@ -96,14 +98,17 @@ public class src_CharacterController : MonoBehaviour
         defaultInput.Character.Sprint.performed += e => ToggleSprint();
         defaultInput.Character.SprintReleased.performed += e => StopSprint();
 
-        defaultInput.Weapon.Fire2Pressed.performed += e => AimingInPressed();
-        defaultInput.Weapon.Fire2Released.performed += e => AimingInReleased();
-
         defaultInput.Character.LeanLeftPressed.performed += e => isLeaningLeft = true;
         defaultInput.Character.LeanLeftReleased.performed += e => isLeaningLeft = false;
 
         defaultInput.Character.LeanRightPressed.performed += e => isLeaningRight = true;
         defaultInput.Character.LeanRightReleased.performed += e => isLeaningRight = false;
+
+        defaultInput.Weapon.Fire2Pressed.performed += e => AimingInPressed();
+        defaultInput.Weapon.Fire2Released.performed += e => AimingInReleased();
+
+        defaultInput.Weapon.Fire1Pressed.performed += e => ShootingPressed();
+        defaultInput.Weapon.Fire1Released.performed += e => ShootingReleased();
 
         defaultInput.Enable();
 
@@ -135,6 +140,27 @@ public class src_CharacterController : MonoBehaviour
         CalculateStance();
         CalculateLeaning();
         CalculateAimingIn();
+    }
+
+    #endregion
+
+    #region - Shooting -
+
+    private void ShootingPressed()
+    {
+        if (currentWeapon)
+        {
+            currentWeapon.isShooting = true;
+            
+        }
+    }
+
+    private void ShootingReleased()
+    {
+        if (currentWeapon)
+        {
+            currentWeapon.isShooting = false;
+        }
     }
 
     #endregion
