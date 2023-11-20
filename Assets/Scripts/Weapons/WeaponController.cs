@@ -106,10 +106,27 @@ public class WeaponController : MonoBehaviour
 
     private void Shoot()
     {
-        var bullet = Instantiate(bulletPrefab, bulletSpawn);
+        var bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
 
-        //Load bullet settings
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        if (bulletScript != null)
+        {
+            //?
+            bulletScript.shooter = gameObject; 
+        }
+
+        RaycastHit hit;
+        if (Physics.Raycast(bulletSpawn.position, bulletSpawn.forward, out hit, Mathf.Infinity))
+        {
+            Damageable damageable = hit.collider.gameObject.GetComponent<Damageable>();
+            if (damageable != null)
+            {
+                damageable.ApplyDamage(bulletScript.damage);
+            }
+        }
     }
+
+    
 
     #endregion
 
