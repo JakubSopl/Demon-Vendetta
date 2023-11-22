@@ -8,18 +8,19 @@ public class Bullet : MonoBehaviour
     public float speed = 10f;
     public float lifeTime = 10;
     public int damage = 10;
-    public GameObject shooter; // Reference to the shooter (e.g., player)
 
     private void Awake()
     {
         Destroy(gameObject, lifeTime);
     }
 
+
     private void Update()
     {
         // Move the bullet forward
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {

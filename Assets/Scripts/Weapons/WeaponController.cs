@@ -56,6 +56,8 @@ public class WeaponController : MonoBehaviour
     private float currentFireRate;
     public List<WeaponFireType> allowedFireTypes;
     public WeaponFireType currentFireType;
+    public float bulletSpeed = 20f;
+
 
     [HideInInspector]
     public bool isAimingIn;
@@ -97,7 +99,7 @@ public class WeaponController : MonoBehaviour
         {
             Shoot();
 
-            if(currentFireType == WeaponFireType.SemiAuto)
+            if (currentFireType == WeaponFireType.SemiAuto)
             {
                 isShooting = false;
             }
@@ -106,27 +108,13 @@ public class WeaponController : MonoBehaviour
 
     private void Shoot()
     {
+
         var bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-
-        Bullet bulletScript = bullet.GetComponent<Bullet>();
-        if (bulletScript != null)
-        {
-            //?
-            bulletScript.shooter = gameObject; 
-        }
-
-        RaycastHit hit;
-        if (Physics.Raycast(bulletSpawn.position, bulletSpawn.forward, out hit, Mathf.Infinity))
-        {
-            Damageable damageable = hit.collider.gameObject.GetComponent<Damageable>();
-            if (damageable != null)
-            {
-                damageable.ApplyDamage(bulletScript.damage);
-            }
-        }
+        
+        Debug.Log("nigga5");
     }
 
-    
+
 
     #endregion
 

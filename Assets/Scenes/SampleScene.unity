@@ -1102,7 +1102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponAnimator: {fileID: 909296788}
-  bulletPrefab: {fileID: 2210214186267272143, guid: b80e599bf29fa7c43bf3b1fa8e5d5dc8, type: 3}
+  bulletPrefab: {fileID: 6982787795655613258, guid: 6ee0600991bb40e43909cb08d06fcfd7, type: 3}
   bulletSpawn: {fileID: 1414221989}
   settings:
     SwayAmount: 6
@@ -1129,6 +1129,7 @@ MonoBehaviour:
   rateOffFire: 0
   allowedFireTypes: 00000000
   currentFireType: 0
+  bulletSpeed: 20
   isAimingIn: 0
   isShooting: 0
 --- !u!1 &1176948259
@@ -1146,7 +1147,7 @@ GameObject:
   - component: {fileID: 1176948260}
   m_Layer: 0
   m_Name: Cube (5)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1163,7 +1164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace075f7cc6353449b76cd250773f83d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 100
 --- !u!65 &1176948261
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1487,7 +1488,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1414221988}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.10499954, z: 0.4810028}
+  m_LocalPosition: {x: 0, y: 0.033, z: 0.554}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1557,7 +1558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace075f7cc6353449b76cd250773f83d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 100
 --- !u!65 &1667888547
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1746,6 +1747,7 @@ GameObject:
   - component: {fileID: 1945561765}
   - component: {fileID: 1945561764}
   - component: {fileID: 1945561768}
+  - component: {fileID: 1945561769}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -1843,7 +1845,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace075f7cc6353449b76cd250773f83d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 100
+--- !u!54 &1945561769
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945561763}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2101207998
 GameObject:
   m_ObjectHideFlags: 0

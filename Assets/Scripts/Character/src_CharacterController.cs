@@ -82,6 +82,7 @@ public class src_CharacterController : MonoBehaviour
     [Header("Aiming In")]
     public bool isAimingIn;
 
+
     #region - Awake -
 
     private void Awake()
