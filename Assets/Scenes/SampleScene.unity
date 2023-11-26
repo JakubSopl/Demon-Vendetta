@@ -1388,23 +1388,23 @@ MonoBehaviour:
     AimingSensitivityEffector: 0.5
     ViewXInverted: 0
     ViewYInverted: 0
-    sprintingHold: 0
-    MovementSmoothing: 0.2
+    sprintingHold: 1
+    MovementSmoothing: 0.3
     RunningFowardSpeed: 6
     RunningStrafeSpeed: 4
     WalkingFowardSpeed: 4
     WalkingBackwardSpeed: 2
     WalkingStrafeSpeed: 3
-    JumpingHeight: 10
-    JumpingFalloff: 0.6
-    FallingSmoothing: 0.6
+    JumpingHeight: 8
+    JumpingFalloff: 0.5
+    FallingSmoothing: 0.8
     SpeedEffector: 1
     CrouchSpeedEffector: 0.6
     ProneSpeedEffector: 0.2
     FallingSpeedEffector: 0.4
     AimingSpeedEffector: 0.5
     isGroundedRadius: 0.1
-    isFallingSpeed: 1
+    isFallingSpeed: 0.8
   viewClampYMin: -70
   viewClampYMax: 80
   playerMask:

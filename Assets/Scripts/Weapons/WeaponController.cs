@@ -72,6 +72,8 @@ public class WeaponController : MonoBehaviour
         newWeaponRotation = transform.localRotation.eulerAngles;
 
         currentFireType = allowedFireTypes.First();
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
 
