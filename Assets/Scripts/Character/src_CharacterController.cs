@@ -149,7 +149,7 @@ public class src_CharacterController : MonoBehaviour
 
     private void ShootingPressed()
     {
-        if (currentWeapon)
+        if (currentWeapon && !isSprinting)
         {
             currentWeapon.isShooting = true;
             
@@ -170,7 +170,10 @@ public class src_CharacterController : MonoBehaviour
 
     private void AimingInPressed()
     {
-        isAimingIn = true;
+        if (!isSprinting)
+        {
+            isAimingIn = true;
+        }
     }
 
     private void AimingInReleased()
@@ -306,6 +309,11 @@ public class src_CharacterController : MonoBehaviour
             targetLean = 0;
         }
 
+        if (playerStance == PlayerStance.Crouch || playerStance == PlayerStance.Prone)
+        {
+            targetLean = 0;
+        }
+
         currentLean = Mathf.SmoothDamp(currentLean, targetLean, ref leanVelocity, leanSmoothing);
 
         LeanPivot.localRotation =  Quaternion.Euler(new Vector3(0, 0, currentLean)); 
@@ -324,6 +332,7 @@ public class src_CharacterController : MonoBehaviour
     {
         if (!isGrounded || playerStance == PlayerStance.Prone)
         {
+            playerStance = PlayerStance.Stand;
             return;
         }
 
@@ -411,7 +420,7 @@ public class src_CharacterController : MonoBehaviour
 
     private void ToggleSprint()
     {
-        if (input_Movement.y <= 0.2f)
+        if (input_Movement.y <= 0.2f || playerStance == PlayerStance.Crouch || playerStance == PlayerStance.Prone)
         {
             isSprinting = false;
             return;
