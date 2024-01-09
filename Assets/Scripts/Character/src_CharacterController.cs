@@ -63,6 +63,11 @@ public class src_CharacterController : MonoBehaviour
     public WeaponController currentWeapon;
     public float weaponAnimationSpeed;
 
+    [Header("Weapon Slots")]
+    public GameObject Slot1;
+    public GameObject Slot2;
+    public GameObject Slot3;
+
     [HideInInspector]
     public bool isGrounded;
     [HideInInspector]
@@ -111,6 +116,10 @@ public class src_CharacterController : MonoBehaviour
         defaultInput.Weapon.Fire1Pressed.performed += e => ShootingPressed();
         defaultInput.Weapon.Fire1Released.performed += e => ShootingReleased();
 
+        defaultInput.Character.EquipWeapon1.performed += e => Equip1();
+        defaultInput.Character.EquipWeapon2.performed += e => Equip2();
+        defaultInput.Character.EquipWeapon3.performed += e => Equip3();
+
         defaultInput.Enable();
 
         newCameraRotation = cameraHolder.localRotation.eulerAngles;
@@ -141,6 +150,7 @@ public class src_CharacterController : MonoBehaviour
         CalculateStance();
         CalculateLeaning();
         CalculateAimingIn();
+
     }
 
     #endregion
@@ -163,6 +173,48 @@ public class src_CharacterController : MonoBehaviour
             currentWeapon.isShooting = false;
         }
     }
+
+    #endregion
+
+    #region - GunSwitch -
+
+    void Equip1()
+    {
+        Slot1.SetActive(true);
+        Slot2.SetActive(false);
+        Slot3.SetActive(false);
+
+        // Update current weapon
+        currentWeapon = Slot1.GetComponent<WeaponController>();
+        if (currentWeapon != null)
+            currentWeapon.Initialise(this);
+    }
+
+    void Equip2()
+    {
+        Slot1.SetActive(false);
+        Slot2.SetActive(true);
+        Slot3.SetActive(false);
+
+        // Update current weapon
+        currentWeapon = Slot2.GetComponent<WeaponController>();
+        if (currentWeapon != null)
+            currentWeapon.Initialise(this);
+    }
+
+    void Equip3()
+    {
+        Slot1.SetActive(false);
+        Slot2.SetActive(false);
+        Slot3.SetActive(true);
+
+        // Update current weapon
+        currentWeapon = Slot3.GetComponent<WeaponController>();
+        if (currentWeapon != null)
+            currentWeapon.Initialise(this);
+    }
+
+
 
     #endregion
 
