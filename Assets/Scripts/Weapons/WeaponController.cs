@@ -5,7 +5,7 @@ using System.Linq;
 
 public class WeaponController : MonoBehaviour
 {
-    private src_CharacterController characterController;
+    private CharacterController characterController;
 
     [Header("References")]
     public Animator weaponAnimator;
@@ -122,7 +122,7 @@ public class WeaponController : MonoBehaviour
 
     #region - Initialise -
 
-    public void Initialise(src_CharacterController CharacterController)
+    public void Initialise(CharacterController CharacterController)
     {
         characterController = CharacterController;
         isInitialised = true;

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using static scr_Models;
 
-public class src_CharacterController : MonoBehaviour
+public class CharacterController : MonoBehaviour
 {
     private WeaponController weaponController;
 
-    private CharacterController characterController;
+    private UnityEngine.CharacterController characterController;
     private DefaultInput defaultInput;
     [HideInInspector]
     public Vector2 input_Movement;
@@ -125,7 +125,7 @@ public class src_CharacterController : MonoBehaviour
         newCameraRotation = cameraHolder.localRotation.eulerAngles;
         newCharacterRotation = transform.localRotation.eulerAngles;
 
-        characterController = GetComponent<CharacterController>();
+        characterController = GetComponent<UnityEngine.CharacterController>();
 
         cameraHeight = cameraHolder.localPosition.y;
 
