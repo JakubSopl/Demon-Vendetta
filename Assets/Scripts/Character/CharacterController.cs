@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static scr_Models;
 
 public class CharacterController : MonoBehaviour
@@ -88,6 +89,9 @@ public class CharacterController : MonoBehaviour
     public bool isAimingIn;
 
 
+    public Image crosshairImage;
+
+
     #region - Awake -
 
     private void Awake()
@@ -150,7 +154,30 @@ public class CharacterController : MonoBehaviour
         CalculateStance();
         CalculateLeaning();
         CalculateAimingIn();
+        CrosshairControl();
 
+    }
+
+    #endregion
+
+    #region - Update -
+
+    private void CrosshairControl()
+    {
+        if (isAimingIn || isSprinting)
+        {
+            crosshairImage.enabled = false;
+        }
+        else if (input_Movement.magnitude > 0 || isFalling) // Assuming this is how you detect movement
+        {
+            crosshairImage.enabled = true;
+            crosshairImage.rectTransform.sizeDelta = new Vector2(75, 75); // Enlarged size
+        }
+        else
+        {
+            crosshairImage.enabled = true;
+            crosshairImage.rectTransform.sizeDelta = new Vector2(50, 50); // Normal size
+        }
     }
 
     #endregion
