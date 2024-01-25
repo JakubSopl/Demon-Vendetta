@@ -88,12 +88,12 @@ public class WeaponController : MonoBehaviour
         SetWeaponAnimations();
         CalculateWeaponSway();
         CalculateAimingIn();
-        CalculateShooting();
+        //CalculateShooting();
     }
 
     #endregion
 
-    #region - Shooting -
+   /* #region - Shooting -
 
     private void CalculateShooting()
     {
@@ -118,7 +118,7 @@ public class WeaponController : MonoBehaviour
 
 
 
-    #endregion
+    #endregion*/
 
     #region - Initialise -
 

@@ -160,7 +160,7 @@ public class CharacterController : MonoBehaviour
 
     #endregion
 
-    #region - Update -
+    #region - Crosshair -
 
     private void CrosshairControl()
     {
