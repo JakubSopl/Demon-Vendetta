@@ -53,19 +53,6 @@ public class WeaponController : MonoBehaviour
     private Vector3 weaponSwayPositionVelocity;
 
     [Header("Shooting")]
-    public float rateOffFire;
-    private float currentFireRate;
-    public List<WeaponFireType> allowedFireTypes;
-    public WeaponFireType currentFireType;
-    public float bulletSpeed = 20f;
-
-
-    [HideInInspector]
-    public bool isAimingIn;
-
-    [HideInInspector]
-    public bool isShooting;
-
     //Gun stats
     public int damage;
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
@@ -87,13 +74,21 @@ public class WeaponController : MonoBehaviour
     public float camShakeMagnitude, camShakeDuration;
     public TextMeshProUGUI text;
 
+
+
+    [HideInInspector]
+    public bool isAimingIn;
+
+    [HideInInspector]
+    public bool isShooting;
+
+    
+
     #region - Start / Update / Awake -
 
     private void Start()
     {
         newWeaponRotation = transform.localRotation.eulerAngles;
-
-        currentFireType = allowedFireTypes.First();
 
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -128,29 +123,7 @@ public class WeaponController : MonoBehaviour
 
     #region - Shooting -
 
-    /*
-     private void CalculateShooting()
-     {
-         if (isShooting)
-         {
-             Shoot();
-
-             if (currentFireType == WeaponFireType.SemiAuto)
-             {
-                 isShooting = false;
-             }
-         }
-     }
-
-     private void Shoot()
-     {
-
-         var bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-
-         Debug.Log("nigga5");
-     }
-
-    */
+    
 
     private void MyInput()
     {
