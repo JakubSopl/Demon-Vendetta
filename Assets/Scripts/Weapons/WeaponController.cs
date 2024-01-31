@@ -2,6 +2,7 @@ using static scr_Models;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 
 public class WeaponController : MonoBehaviour
 {
@@ -65,7 +66,28 @@ public class WeaponController : MonoBehaviour
     [HideInInspector]
     public bool isShooting;
 
-    #region - Start / Update -
+    //Gun stats
+    public int damage;
+    public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
+    public int magazineSize, bulletsPerTap;
+    public bool allowButtonHold;
+    int bulletsLeft, bulletsShot;
+
+    //bools 
+    bool shooting, readyToShoot, reloading;
+
+    //Reference
+    public Camera fpsCam;
+    public Transform attackPoint;
+    public RaycastHit rayHit;
+    public LayerMask whatIsEnemy;
+
+    //Graphics
+    public GameObject muzzleFlash, bulletHoleGraphic;
+    public float camShakeMagnitude, camShakeDuration;
+    public TextMeshProUGUI text;
+
+    #region - Start / Update / Awake -
 
     private void Start()
     {
@@ -89,36 +111,112 @@ public class WeaponController : MonoBehaviour
         CalculateWeaponSway();
         CalculateAimingIn();
         //CalculateShooting();
+
+        MyInput();
+
+        //SetText
+        text.SetText(bulletsLeft + " / " + magazineSize);
+    }
+
+    private void Awake()
+    {
+        bulletsLeft = magazineSize;
+        readyToShoot = true;
     }
 
     #endregion
 
-   /* #region - Shooting -
+    #region - Shooting -
 
-    private void CalculateShooting()
+    /*
+     private void CalculateShooting()
+     {
+         if (isShooting)
+         {
+             Shoot();
+
+             if (currentFireType == WeaponFireType.SemiAuto)
+             {
+                 isShooting = false;
+             }
+         }
+     }
+
+     private void Shoot()
+     {
+
+         var bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+
+         Debug.Log("nigga5");
+     }
+
+    */
+
+    private void MyInput()
     {
-        if (isShooting)
-        {
-            Shoot();
+        if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
+        else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
-            if (currentFireType == WeaponFireType.SemiAuto)
-            {
-                isShooting = false;
-            }
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading) Reload();
+
+        //Shoot
+        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+        {
+            bulletsShot = bulletsPerTap;
+            Shoot();
         }
     }
-
     private void Shoot()
     {
+        readyToShoot = false;
 
-        var bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-        
-        Debug.Log("nigga5");
+        //Spread
+        float x = Random.Range(-spread, spread);
+        float y = Random.Range(-spread, spread);
+
+        //Calculate Direction with Spread
+        Vector3 direction = fpsCam.transform.forward + new Vector3(x, y, 0);
+
+        //RayCast
+        if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatIsEnemy))
+        {
+            Debug.Log(rayHit.collider.name);
+
+            if (rayHit.collider.CompareTag("Enemy"))
+                rayHit.collider.GetComponent<Damageable>().ApplyDamage(damage);
+
+        }
+
+
+
+        //Graphics
+        GameObject bulletHole = Instantiate(bulletHoleGraphic, rayHit.point + rayHit.normal * 0.001f, Quaternion.LookRotation(rayHit.normal));
+        Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+
+        bulletsLeft--;
+        bulletsShot--;
+
+        Invoke("ResetShot", timeBetweenShooting);
+
+        if (bulletsShot > 0 && bulletsLeft > 0)
+            Invoke("Shoot", timeBetweenShots);
+    }
+    private void ResetShot()
+    {
+        readyToShoot = true;
+    }
+    private void Reload()
+    {
+        reloading = true;
+        Invoke("ReloadFinished", reloadTime);
+    }
+    private void ReloadFinished()
+    {
+        bulletsLeft = magazineSize;
+        reloading = false;
     }
 
-
-
-    #endregion*/
+    #endregion
 
     #region - Initialise -
 

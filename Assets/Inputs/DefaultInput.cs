@@ -152,6 +152,15 @@ public partial class @DefaultInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipWeapon4"",
+                    ""type"": ""Button"",
+                    ""id"": ""43c45c46-094a-4cae-ab3c-a209152eac04"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -363,6 +372,17 @@ public partial class @DefaultInput : IInputActionCollection2, IDisposable
                     ""action"": ""Equip Weapon3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ea7aa3c1-41e3-4fd5-981e-d7defaf500b8"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipWeapon4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -473,6 +493,7 @@ public partial class @DefaultInput : IInputActionCollection2, IDisposable
         m_Character_EquipWeapon1 = m_Character.FindAction("EquipWeapon1", throwIfNotFound: true);
         m_Character_EquipWeapon2 = m_Character.FindAction("EquipWeapon2", throwIfNotFound: true);
         m_Character_EquipWeapon3 = m_Character.FindAction("Equip Weapon3", throwIfNotFound: true);
+        m_Character_EquipWeapon4 = m_Character.FindAction("EquipWeapon4", throwIfNotFound: true);
         // Weapon
         m_Weapon = asset.FindActionMap("Weapon", throwIfNotFound: true);
         m_Weapon_Fire2Pressed = m_Weapon.FindAction("Fire2Pressed", throwIfNotFound: true);
@@ -552,6 +573,7 @@ public partial class @DefaultInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_EquipWeapon1;
     private readonly InputAction m_Character_EquipWeapon2;
     private readonly InputAction m_Character_EquipWeapon3;
+    private readonly InputAction m_Character_EquipWeapon4;
     public struct CharacterActions
     {
         private @DefaultInput m_Wrapper;
@@ -570,6 +592,7 @@ public partial class @DefaultInput : IInputActionCollection2, IDisposable
         public InputAction @EquipWeapon1 => m_Wrapper.m_Character_EquipWeapon1;
         public InputAction @EquipWeapon2 => m_Wrapper.m_Character_EquipWeapon2;
         public InputAction @EquipWeapon3 => m_Wrapper.m_Character_EquipWeapon3;
+        public InputAction @EquipWeapon4 => m_Wrapper.m_Character_EquipWeapon4;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -621,6 +644,9 @@ public partial class @DefaultInput : IInputActionCollection2, IDisposable
                 @EquipWeapon3.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnEquipWeapon3;
                 @EquipWeapon3.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnEquipWeapon3;
                 @EquipWeapon3.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnEquipWeapon3;
+                @EquipWeapon4.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnEquipWeapon4;
+                @EquipWeapon4.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnEquipWeapon4;
+                @EquipWeapon4.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnEquipWeapon4;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -667,6 +693,9 @@ public partial class @DefaultInput : IInputActionCollection2, IDisposable
                 @EquipWeapon3.started += instance.OnEquipWeapon3;
                 @EquipWeapon3.performed += instance.OnEquipWeapon3;
                 @EquipWeapon3.canceled += instance.OnEquipWeapon3;
+                @EquipWeapon4.started += instance.OnEquipWeapon4;
+                @EquipWeapon4.performed += instance.OnEquipWeapon4;
+                @EquipWeapon4.canceled += instance.OnEquipWeapon4;
             }
         }
     }
@@ -744,6 +773,7 @@ public partial class @DefaultInput : IInputActionCollection2, IDisposable
         void OnEquipWeapon1(InputAction.CallbackContext context);
         void OnEquipWeapon2(InputAction.CallbackContext context);
         void OnEquipWeapon3(InputAction.CallbackContext context);
+        void OnEquipWeapon4(InputAction.CallbackContext context);
     }
     public interface IWeaponActions
     {

@@ -895,7 +895,6 @@ GameObject:
   m_Component:
   - component: {fileID: 781073445}
   - component: {fileID: 781073446}
-  - component: {fileID: 781073447}
   m_Layer: 11
   m_Name: WeaponXMShotgun
   m_TagString: Untagged
@@ -962,18 +961,6 @@ MonoBehaviour:
   bulletSpeed: 20
   isAimingIn: 0
   isShooting: 0
---- !u!114 &781073447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 781073444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebeaa1823164c67468ace940f32d384e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   damage: 20
   timeBetweenShooting: 1
   spread: 0.06
@@ -990,8 +977,8 @@ MonoBehaviour:
     m_Bits: 2147483647
   muzzleFlash: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4, type: 3}
   bulletHoleGraphic: {fileID: 1000010844420130, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
-  camShakeMagnitude: 0.1
-  camShakeDuration: 0.1
+  camShakeMagnitude: 0
+  camShakeDuration: 0
   text: {fileID: 788330576}
 --- !u!1 &788330574
 GameObject:
@@ -1028,7 +1015,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 246, y: 206}
+  m_AnchoredPosition: {x: 296, y: 205}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &788330576
@@ -1051,7 +1038,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1134,7 +1121,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24454
+  m_Name: pb_Mesh24820
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1305,7 +1292,7 @@ GameObject:
   - component: {fileID: 894208851}
   - component: {fileID: 894208850}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CanvasCrosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1460,7 +1447,7 @@ GameObject:
   - component: {fileID: 916440426}
   - component: {fileID: 916440425}
   m_Layer: 5
-  m_Name: Image
+  m_Name: CrosshairImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1832,7 +1819,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1075882572}
   - component: {fileID: 1075882573}
-  - component: {fileID: 1075882574}
   m_Layer: 11
   m_Name: WeaponM4A4
   m_TagString: Untagged
@@ -1899,18 +1885,6 @@ MonoBehaviour:
   bulletSpeed: 20
   isAimingIn: 0
   isShooting: 0
---- !u!114 &1075882574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1075882571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebeaa1823164c67468ace940f32d384e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   damage: 15
   timeBetweenShooting: 0.2
   spread: 0.02
@@ -1948,7 +1922,7 @@ GameObject:
   - component: {fileID: 1176660637}
   - component: {fileID: 1176660636}
   m_Layer: 5
-  m_Name: Canvasbullet
+  m_Name: CanvasBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2337,6 +2311,7 @@ MonoBehaviour:
   Slot1: {fileID: 1075882571}
   Slot2: {fileID: 781073444}
   Slot3: {fileID: 1495036885}
+  Slot4: {fileID: 919132149155446097, guid: aef455a8765be104391367ad69963565, type: 3}
   isGrounded: 0
   isFalling: 0
   LeanPivot: {fileID: 2101207999}
@@ -2643,7 +2618,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1495036886}
   - component: {fileID: 1495036887}
-  - component: {fileID: 1495036888}
   m_Layer: 11
   m_Name: WeaponDeagle
   m_TagString: Untagged
@@ -2710,18 +2684,6 @@ MonoBehaviour:
   bulletSpeed: 20
   isAimingIn: 0
   isShooting: 0
---- !u!114 &1495036888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1495036885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebeaa1823164c67468ace940f32d384e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   damage: 20
   timeBetweenShooting: 1
   spread: 0

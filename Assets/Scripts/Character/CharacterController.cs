@@ -68,6 +68,7 @@ public class CharacterController : MonoBehaviour
     public GameObject Slot1;
     public GameObject Slot2;
     public GameObject Slot3;
+    public GameObject Slot4;
 
     [HideInInspector]
     public bool isGrounded;
@@ -123,6 +124,7 @@ public class CharacterController : MonoBehaviour
         defaultInput.Character.EquipWeapon1.performed += e => Equip1();
         defaultInput.Character.EquipWeapon2.performed += e => Equip2();
         defaultInput.Character.EquipWeapon3.performed += e => Equip3();
+        //defaultInput.Character.EquipWeapon4.performed += e => Equip4();
 
         defaultInput.Enable();
 
@@ -210,6 +212,7 @@ public class CharacterController : MonoBehaviour
         Slot1.SetActive(true);
         Slot2.SetActive(false);
         Slot3.SetActive(false);
+        Slot4.SetActive(false);
 
         // Update current weapon
         currentWeapon = Slot1.GetComponent<WeaponController>();
@@ -222,6 +225,7 @@ public class CharacterController : MonoBehaviour
         Slot1.SetActive(false);
         Slot2.SetActive(true);
         Slot3.SetActive(false);
+        Slot4.SetActive(false);
 
         // Update current weapon
         currentWeapon = Slot2.GetComponent<WeaponController>();
@@ -234,6 +238,7 @@ public class CharacterController : MonoBehaviour
         Slot1.SetActive(false);
         Slot2.SetActive(false);
         Slot3.SetActive(true);
+        Slot4.SetActive(false);
 
         // Update current weapon
         currentWeapon = Slot3.GetComponent<WeaponController>();
@@ -241,7 +246,22 @@ public class CharacterController : MonoBehaviour
             currentWeapon.Initialise(this);
     }
 
+    /*
+    void Equip4()
+    {
+        Slot1.SetActive(false);
+        Slot2.SetActive(false);
+        Slot3.SetActive(false);
+        Slot4.SetActive(true);
 
+        // Update current weapon
+        currentWeapon = Slot4.GetComponent<WeaponController>();
+        if (currentWeapon != null)
+            currentWeapon.Initialise(this);
+
+    }
+
+    */
 
     #endregion
 

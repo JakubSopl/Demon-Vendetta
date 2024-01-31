@@ -123,9 +123,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Equip Weapon3",
+                    "name": "EquipWeapon3",
                     "type": "Button",
                     "id": "f0f6daec-718b-42ba-ac9a-b0bcfbceca7f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EquipWeapon4",
+                    "type": "Button",
+                    "id": "43c45c46-094a-4cae-ab3c-a209152eac04",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -338,7 +347,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Equip Weapon3",
+                    "action": "EquipWeapon3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ea7aa3c1-41e3-4fd5-981e-d7defaf500b8",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EquipWeapon4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
