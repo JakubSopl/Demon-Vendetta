@@ -124,7 +124,7 @@ public class CharacterController : MonoBehaviour
         defaultInput.Character.EquipWeapon1.performed += e => Equip1();
         defaultInput.Character.EquipWeapon2.performed += e => Equip2();
         defaultInput.Character.EquipWeapon3.performed += e => Equip3();
-        //defaultInput.Character.EquipWeapon4.performed += e => Equip4();
+        defaultInput.Character.EquipWeapon4.performed += e => Equip4();
 
         defaultInput.Enable();
 
@@ -246,7 +246,7 @@ public class CharacterController : MonoBehaviour
             currentWeapon.Initialise(this);
     }
 
-    /*
+    
     void Equip4()
     {
         Slot1.SetActive(false);
@@ -261,7 +261,7 @@ public class CharacterController : MonoBehaviour
 
     }
 
-    */
+    
 
     #endregion
 

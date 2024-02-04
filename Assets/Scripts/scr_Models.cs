@@ -66,12 +66,6 @@ public static class scr_Models
     #endregion
 
     #region - Weapons -
-        
-    public enum WeaponFireType
-    {
-        SemiAuto,
-        FullyAuto
-    }
 
     [Serializable]
     public class WeaponSettingsModel

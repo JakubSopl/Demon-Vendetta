@@ -71,7 +71,6 @@ public class WeaponController : MonoBehaviour
 
     //Graphics
     public GameObject muzzleFlash, bulletHoleGraphic;
-    public float camShakeMagnitude, camShakeDuration;
     public TextMeshProUGUI text;
 
 
@@ -81,6 +80,8 @@ public class WeaponController : MonoBehaviour
 
     [HideInInspector]
     public bool isShooting;
+
+
 
     
 
@@ -131,13 +132,14 @@ public class WeaponController : MonoBehaviour
         else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
         if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading) Reload();
-
+      
         //Shoot
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
         {
             bulletsShot = bulletsPerTap;
             Shoot();
         }
+        
     }
     private void Shoot()
     {
@@ -161,10 +163,11 @@ public class WeaponController : MonoBehaviour
         }
 
 
-
         //Graphics
         GameObject bulletHole = Instantiate(bulletHoleGraphic, rayHit.point + rayHit.normal * 0.001f, Quaternion.LookRotation(rayHit.normal));
-        Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+        GameObject flashInstance = Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+
+        Destroy(flashInstance, 1f); 
 
         bulletsLeft--;
         bulletsShot--;
