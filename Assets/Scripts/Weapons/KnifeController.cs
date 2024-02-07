@@ -1,10 +1,10 @@
-using static scr_Models;
-using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
+using UnityEngine;
+using static scr_Models;
 
-public class WeaponController : MonoBehaviour
+public class KnifeController : MonoBehaviour
 {
     private CharacterController characterController;
 
@@ -54,27 +54,14 @@ public class WeaponController : MonoBehaviour
     private float swayTime;
     private Vector3 swayPosition;
 
-    [Header("Sights")]
-    [SerializeField]
-    private Transform sightTarget;
-    [SerializeField]
-    private float sightOffset;
-    [SerializeField]
-    private float aimingInTime;
-    private Vector3 weaponSwayPosition;
-    private Vector3 weaponSwayPositionVelocity;
-
     [Header("Shooting")]
     //Gun stats
     [SerializeField]
     private int damage;
     [SerializeField]
-    private float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
+    private float timeBetweenShooting, spread, range, timeBetweenShots;
     [SerializeField]
-    private int magazineSize, bulletsPerTap;
-    [SerializeField]
-    private bool allowButtonHold;
-    int bulletsLeft, bulletsShot;
+    private int bulletsPerTap;
 
     //bools 
     bool shooting, readyToShoot, reloading;
@@ -92,6 +79,7 @@ public class WeaponController : MonoBehaviour
     //Graphics
     [SerializeField]
     private GameObject muzzleFlash, bulletHoleGraphic;
+
     [SerializeField]
     private TextMeshProUGUI text;
 
@@ -102,22 +90,15 @@ public class WeaponController : MonoBehaviour
 
     [HideInInspector]
     public bool isShooting;
-
-
-
-    
-
-    #region - Start / Update / Awake -
-
-    private void Start()
+    void Start()
     {
         newWeaponRotation = transform.localRotation.eulerAngles;
 
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
         if (!isInitialised)
         {
@@ -127,41 +108,31 @@ public class WeaponController : MonoBehaviour
         CalculateWeaponRotation();
         SetWeaponAnimations();
         CalculateWeaponSway();
-        CalculateAimingIn();
-        //CalculateShooting();
-
         MyInput();
 
-        //SetText
-        text.SetText(bulletsLeft + " / " + magazineSize);
+        text.SetText(" ");
     }
 
     private void Awake()
     {
-        bulletsLeft = magazineSize;
         readyToShoot = true;
     }
 
-    #endregion
-
     #region - Shooting -
 
-    
+
 
     private void MyInput()
     {
-        if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
-        else shooting = Input.GetKeyDown(KeyCode.Mouse0);
+        shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading) Reload();
-      
         //Shoot
-        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+        if (readyToShoot && shooting)
         {
-            bulletsShot = bulletsPerTap;
             Shoot();
         }
-        
+
+
     }
     private void Shoot()
     {
@@ -189,29 +160,14 @@ public class WeaponController : MonoBehaviour
         GameObject bulletHole = Instantiate(bulletHoleGraphic, rayHit.point + rayHit.normal * 0.001f, Quaternion.LookRotation(rayHit.normal));
         GameObject flashInstance = Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
 
-        Destroy(flashInstance, 1f); 
+        Destroy(flashInstance, 1f);
 
-        bulletsLeft--;
-        bulletsShot--;
-
+        // Reset the readyToShoot flag after the specified time interval
         Invoke("ResetShot", timeBetweenShooting);
-
-        if (bulletsShot > 0 && bulletsLeft > 0)
-            Invoke("Shoot", timeBetweenShots);
     }
     private void ResetShot()
     {
         readyToShoot = true;
-    }
-    private void Reload()
-    {
-        reloading = true;
-        Invoke("ReloadFinished", reloadTime);
-    }
-    private void ReloadFinished()
-    {
-        bulletsLeft = magazineSize;
-        reloading = false;
     }
 
     #endregion
@@ -222,25 +178,6 @@ public class WeaponController : MonoBehaviour
     {
         characterController = CharacterController;
         isInitialised = true;
-    }
-
-    #endregion
-
-    #region - Aiming In -
-
-    private void CalculateAimingIn()
-    {
-        var targetPosition = transform.position;
-
-        if (isAimingIn)
-        {
-            targetPosition = characterController.camera.transform.position + (weaponSwayObject.transform.position - sightTarget.transform.position) + (characterController.camera.transform.forward * sightOffset);         
-        }
-        
-
-        weaponSwayPosition = weaponSwayObject.transform.position;
-        weaponSwayPosition = Vector3.SmoothDamp(weaponSwayPosition, targetPosition, ref weaponSwayPositionVelocity, aimingInTime);
-        weaponSwayObject.transform.position = weaponSwayPosition + swayPosition;
     }
 
     #endregion
@@ -321,7 +258,7 @@ public class WeaponController : MonoBehaviour
         swayPosition = Vector3.Lerp(swayPosition, targetPosition, Time.smoothDeltaTime * swayLerpSpeed);
         swayTime += Time.deltaTime;
 
-        if(swayTime > 6.3f)
+        if (swayTime > 6.3f)
         {
             swayTime = 0;
         }

@@ -62,6 +62,7 @@ public class CharacterController : MonoBehaviour
 
     [Header("Weapon")]
     public WeaponController currentWeapon;
+    public KnifeController currentWeaponKnife;
     public float weaponAnimationSpeed;
 
     [Header("Weapon Slots")]
@@ -139,6 +140,11 @@ public class CharacterController : MonoBehaviour
         {
             currentWeapon.Initialise(this);
         }
+
+        if (currentWeaponKnife)
+        {
+            currentWeaponKnife.Initialise(this);
+        }
     }
 
     #endregion
@@ -193,6 +199,12 @@ public class CharacterController : MonoBehaviour
             currentWeapon.isShooting = true;
             
         }
+
+        if (currentWeaponKnife && !isSprinting)
+        {
+            currentWeaponKnife.isShooting = true;
+
+        }
     }
 
     private void ShootingReleased()
@@ -200,6 +212,11 @@ public class CharacterController : MonoBehaviour
         if (currentWeapon)
         {
             currentWeapon.isShooting = false;
+        }
+
+        if (currentWeaponKnife)
+        {
+            currentWeaponKnife.isShooting = false;
         }
     }
 
@@ -255,9 +272,9 @@ public class CharacterController : MonoBehaviour
         Slot4.SetActive(true);
 
         // Update current weapon
-        currentWeapon = Slot4.GetComponent<WeaponController>();
-        if (currentWeapon != null)
-            currentWeapon.Initialise(this);
+        currentWeaponKnife = Slot4.GetComponent<KnifeController>();
+        if (currentWeaponKnife != null)
+            currentWeaponKnife.Initialise(this);
 
     }
 
@@ -288,7 +305,9 @@ public class CharacterController : MonoBehaviour
         }
 
         currentWeapon.isAimingIn = isAimingIn;
+
     }
+
 
     #endregion
 
@@ -333,6 +352,7 @@ public class CharacterController : MonoBehaviour
         {
             verticalSpeed = playerSettings.RunningFowardSpeed;
             horizontalSpeed = playerSettings.RunningStrafeSpeed;
+            isAimingIn = false;
         }
 
         if (!isGrounded)
@@ -450,6 +470,7 @@ public class CharacterController : MonoBehaviour
         jumpingForce = Vector3.up * playerSettings.JumpingHeight;
         playerGravity = 0;
         currentWeapon.TriggerJump();
+        currentWeaponKnife.TriggerJump();
     }
 
     #endregion
