@@ -79,11 +79,10 @@ public class KnifeController : MonoBehaviour
     //Graphics
     [SerializeField]
     private GameObject muzzleFlash, bulletHoleGraphic;
+    private Animator anim;
 
     [SerializeField]
     private TextMeshProUGUI text;
-
-
 
     [HideInInspector]
     public bool isAimingIn;
@@ -95,6 +94,8 @@ public class KnifeController : MonoBehaviour
         newWeaponRotation = transform.localRotation.eulerAngles;
 
         Cursor.lockState = CursorLockMode.Locked;
+
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -132,7 +133,14 @@ public class KnifeController : MonoBehaviour
             Shoot();
         }
 
-
+        if (shooting)
+        {
+            anim.SetBool("attack", true);
+        }
+        else
+        {
+            anim.SetBool("attack", false);
+        }
     }
     private void Shoot()
     {
