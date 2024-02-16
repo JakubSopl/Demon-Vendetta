@@ -1,4 +1,4 @@
-using static scr_Models;
+using static Scr_Models;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,7 +94,7 @@ public class WeaponController : MonoBehaviour
     private GameObject muzzleFlash, bulletHoleGraphic;
     [SerializeField]
     private TextMeshProUGUI text;
-
+    private Animator anim;
 
 
     [HideInInspector]
@@ -114,6 +114,8 @@ public class WeaponController : MonoBehaviour
         newWeaponRotation = transform.localRotation.eulerAngles;
 
         Cursor.lockState = CursorLockMode.Locked;
+
+        anim = GetComponent<Animator>();
     }
 
 
@@ -161,7 +163,15 @@ public class WeaponController : MonoBehaviour
             bulletsShot = bulletsPerTap;
             Shoot();
         }
-        
+
+        if (reloading && !isAimingIn && !isShooting && isGroundedTrigger == true)
+        {
+            anim.SetBool("reload", true);
+        }
+        else
+        {
+            anim.SetBool("reload", false);
+        }
     }
     private void Shoot()
     {
@@ -194,10 +204,10 @@ public class WeaponController : MonoBehaviour
         bulletsLeft--;
         bulletsShot--;
 
-        Invoke("ResetShot", timeBetweenShooting);
+        Invoke(nameof(ResetShot), timeBetweenShooting);
 
         if (bulletsShot > 0 && bulletsLeft > 0)
-            Invoke("Shoot", timeBetweenShots);
+            Invoke(nameof(Shoot), timeBetweenShots);
     }
     private void ResetShot()
     {
@@ -205,8 +215,15 @@ public class WeaponController : MonoBehaviour
     }
     private void Reload()
     {
-        reloading = true;
-        Invoke("ReloadFinished", reloadTime);
+        if (isAimingIn || isShooting)
+        {
+            reloading = false;
+        }
+        else
+        {
+            reloading = true;
+            Invoke(nameof(ReloadFinished), reloadTime);
+        }
     }
     private void ReloadFinished()
     {
@@ -304,6 +321,7 @@ public class WeaponController : MonoBehaviour
             weaponAnimator.SetTrigger("Falling");
             isGroundedTrigger = false;
         }
+
 
         weaponAnimator.SetBool("isSprinting", characterController.isSprinting);
         weaponAnimator.SetFloat("WeaponAnimationSpeed", characterController.weaponAnimationSpeed);

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class scr_Models
+public static class Scr_Models
 {
     #region - Player -
 

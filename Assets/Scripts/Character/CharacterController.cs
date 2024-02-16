@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static scr_Models;
+using static Scr_Models;
 
 public class CharacterController : MonoBehaviour
 {
-    private WeaponController weaponController;
-
     private UnityEngine.CharacterController characterController;
     private DefaultInput defaultInput;
     [HideInInspector]
@@ -47,7 +45,7 @@ public class CharacterController : MonoBehaviour
     public CharacterStance playerCrouchStance;
     public CharacterStance playerProneStance;
 
-    private float stanceCheckErrorMargin = 0.05f;
+    private readonly float stanceCheckErrorMargin = 0.05f;
     private float cameraHeight;
     private float cameraHeightVelocity;
 
@@ -56,6 +54,9 @@ public class CharacterController : MonoBehaviour
 
     [HideInInspector]
     public bool isSprinting;
+
+    [SerializeField] private float sprintCooldown = 0.5f; // Cooldown time in seconds before allowing sprint toggle again
+    private float lastSprintToggleTime = 0f; // Tracks the last time sprint was toggled
 
     private Vector3 newMovementSpeed;
     private Vector3 newMovementSpeedVelocity;
@@ -470,7 +471,7 @@ public class CharacterController : MonoBehaviour
         jumpingForce = Vector3.up * playerSettings.JumpingHeight;
         playerGravity = 0;
         currentWeapon.TriggerJump();
-        currentWeaponKnife.TriggerJump();
+        //currentWeaponKnife.TriggerJump();
     }
 
     #endregion
@@ -540,6 +541,10 @@ public class CharacterController : MonoBehaviour
 
     private void ToggleSprint()
     {
+        // Check for cooldown to prevent rapid toggling
+        if (Time.time - lastSprintToggleTime < sprintCooldown)
+            return;
+
         if (input_Movement.y <= 0.2f || playerStance == PlayerStance.Crouch || playerStance == PlayerStance.Prone)
         {
             isSprinting = false;
@@ -547,6 +552,7 @@ public class CharacterController : MonoBehaviour
         }
 
         isSprinting = !isSprinting;
+        lastSprintToggleTime = Time.time; // Update the last toggle time
     }
 
     private void StopSprint()
@@ -556,6 +562,7 @@ public class CharacterController : MonoBehaviour
             isSprinting = false;
         }
     }
+
 
     #endregion
 

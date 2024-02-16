@@ -75,16 +75,16 @@ public class GunSystem : MonoBehaviour
 
 
         //Graphics
-        GameObject bulletHole = Instantiate(bulletHoleGraphic, rayHit.point + rayHit.normal * 0.001f, Quaternion.LookRotation(rayHit.normal));
+        GameObject bulletHole = Instantiate(bulletHoleGraphic, rayHit.point + (rayHit.normal * 0.001f), Quaternion.LookRotation(rayHit.normal));
         Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
 
         bulletsLeft--;
         bulletsShot--;
 
-        Invoke("ResetShot", timeBetweenShooting);
+        Invoke(nameof(ResetShot), timeBetweenShooting);
 
         if (bulletsShot > 0 && bulletsLeft > 0)
-            Invoke("Shoot", timeBetweenShots);
+            Invoke(nameof(Shoot), timeBetweenShots);
     }
     private void ResetShot()
     {
@@ -93,7 +93,7 @@ public class GunSystem : MonoBehaviour
     private void Reload()
     {
         reloading = true;
-        Invoke("ReloadFinished", reloadTime);
+        Invoke(nameof(ReloadFinished), reloadTime);
     }
     private void ReloadFinished()
     {

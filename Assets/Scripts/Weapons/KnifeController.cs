@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static scr_Models;
+using static Scr_Models;
 
 public class KnifeController : MonoBehaviour
 {
@@ -64,7 +64,7 @@ public class KnifeController : MonoBehaviour
     private int bulletsPerTap;
 
     //bools 
-    bool shooting, readyToShoot, reloading;
+    bool shooting, readyToShoot;
 
     //Reference
     [SerializeField]
@@ -171,7 +171,7 @@ public class KnifeController : MonoBehaviour
         Destroy(flashInstance, 1f);
 
         // Reset the readyToShoot flag after the specified time interval
-        Invoke("ResetShot", timeBetweenShooting);
+        Invoke(nameof(ResetShot), timeBetweenShooting);
     }
     private void ResetShot()
     {

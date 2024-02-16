@@ -164,7 +164,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 192157960}
-  - component: {fileID: 192157961}
   - component: {fileID: 192157962}
   - component: {fileID: 192157963}
   m_Layer: 11
@@ -173,7 +172,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &192157960
 Transform:
   m_ObjectHideFlags: 0
@@ -190,61 +189,6 @@ Transform:
   m_Father: {fileID: 2101207999}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &192157961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 192157959}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dff0b378421d9644e888d606588c3810, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponAnimator: {fileID: 1455511897}
-  bulletSpawn: {fileID: 386979732}
-  settings:
-    SwayAmount: 6
-    SwayYInverted: 0
-    SwayXInverted: 0
-    SwaySmoothing: 0.1
-    SwayResetSmoothing: 0.1
-    SwayClampX: 8
-    SwayClampY: 8
-    MovementSwayX: 10
-    MovementSwayY: 3
-    MovementSwayYInverted: 1
-    MovementSwayXInverted: 0
-    MovementSwaySmoothing: 0.5
-  fallingDelay: 0
-  weaponSwayObject: {fileID: 449440131}
-  swayAmountA: 1
-  swayAmountB: 2
-  swayScale: 5000
-  swayLerpSpeed: 14
-  sightTarget: {fileID: 807009232}
-  sightOffset: 0.2
-  aimingInTime: 0.2
-  damage: 20
-  timeBetweenShooting: 1
-  spread: 0
-  range: 1
-  reloadTime: 1
-  timeBetweenShots: 0.2
-  magazineSize: 7
-  bulletsPerTap: 1
-  allowButtonHold: 0
-  fpsCam: {fileID: 963194227}
-  attackPoint: {fileID: 386979732}
-  whatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 2147483647
-  muzzleFlash: {fileID: 1000012142692022, guid: a475880e7da0e9548aa05cb7933752cd, type: 3}
-  bulletHoleGraphic: {fileID: 1000010844420130, guid: 8c6c1845c669d2a449918602c8997a66, type: 3}
-  text: {fileID: 788330576}
-  isAimingIn: 0
-  isShooting: 0
 --- !u!114 &192157962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,7 +223,7 @@ MonoBehaviour:
   swayScale: 5000
   swayLerpSpeed: 14
   damage: 20
-  timeBetweenShooting: 1
+  timeBetweenShooting: 0.4
   spread: 0
   range: 1
   timeBetweenShots: 0.2
@@ -696,7 +640,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24834
+  m_Name: pb_Mesh24832
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1371,6 +1315,7 @@ GameObject:
   m_Component:
   - component: {fileID: 781073445}
   - component: {fileID: 781073446}
+  - component: {fileID: 781073447}
   m_Layer: 11
   m_Name: WeaponXMShotgun
   m_TagString: Untagged
@@ -1434,7 +1379,7 @@ MonoBehaviour:
   timeBetweenShooting: 1
   spread: 0.06
   range: 100
-  reloadTime: 2
+  reloadTime: 1.3
   timeBetweenShots: 0.05
   magazineSize: 24
   bulletsPerTap: 5
@@ -1449,6 +1394,26 @@ MonoBehaviour:
   text: {fileID: 788330576}
   isAimingIn: 0
   isShooting: 0
+--- !u!95 &781073447
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781073444}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1c1cff9648ea70c47afa229cedf3c83e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &788330574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,7 +1449,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 281, y: 232}
+  m_AnchoredPosition: {x: 276, y: 205}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &788330576
@@ -2155,13 +2120,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1075882572}
   - component: {fileID: 1075882573}
+  - component: {fileID: 1075882574}
   m_Layer: 11
   m_Name: WeaponM4A4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1075882572
 Transform:
   m_ObjectHideFlags: 0
@@ -2218,7 +2184,7 @@ MonoBehaviour:
   timeBetweenShooting: 0.2
   spread: 0.02
   range: 100
-  reloadTime: 1
+  reloadTime: 0.7
   timeBetweenShots: 0.01
   magazineSize: 30
   bulletsPerTap: 1
@@ -2233,6 +2199,26 @@ MonoBehaviour:
   text: {fileID: 788330576}
   isAimingIn: 0
   isShooting: 0
+--- !u!95 &1075882574
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075882571}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9860cb36a1004304c8810493a3f2efe9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &1104994285 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 090fe2434057deb4ea1afddd94b3b4b2, type: 3}
@@ -2635,6 +2621,7 @@ MonoBehaviour:
     CameraHeight: -0.7
     StanceCollider: {fileID: 1187717184}
   isSprinting: 0
+  sprintCooldown: 1
   currentWeapon: {fileID: 1075882573}
   currentWeaponKnife: {fileID: 0}
   weaponAnimationSpeed: 0
@@ -3035,6 +3022,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1495036886}
   - component: {fileID: 1495036887}
+  - component: {fileID: 1495036888}
   m_Layer: 11
   m_Name: WeaponDeagle
   m_TagString: Untagged
@@ -3098,7 +3086,7 @@ MonoBehaviour:
   timeBetweenShooting: 1
   spread: 0
   range: 150
-  reloadTime: 1
+  reloadTime: 0.7
   timeBetweenShots: 0.2
   magazineSize: 7
   bulletsPerTap: 1
@@ -3113,6 +3101,26 @@ MonoBehaviour:
   text: {fileID: 788330576}
   isAimingIn: 0
   isShooting: 0
+--- !u!95 &1495036888
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495036885}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d4484af0aa97a6743af630974cc03aa9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1507216014
 PrefabInstance:
   m_ObjectHideFlags: 0
