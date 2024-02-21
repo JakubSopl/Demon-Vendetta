@@ -317,6 +317,18 @@ public class CharacterController : MonoBehaviour
     private void SetIsGrounded()
     {
         isGrounded = Physics.CheckSphere(feetTransform.position, playerSettings.isGroundedRadius, groundMask);
+
+        if (!isGrounded)
+        {
+            // Define the extra distance you're willing to consider the player as still being grounded.
+            float extraGroundedDistance = 0.5f; // 0.5 meters above the ground
+
+            RaycastHit hit;
+            if (Physics.Raycast(feetTransform.position, Vector3.down, out hit, playerSettings.isGroundedRadius + extraGroundedDistance, groundMask))
+            {
+                isGrounded = true;
+            }
+        }
     }
 
     private void SetIsFalling()
@@ -406,6 +418,7 @@ public class CharacterController : MonoBehaviour
         movementSpeed += jumpingForce * Time.deltaTime;
 
         characterController.Move(movementSpeed);
+
     }
 
     #endregion
@@ -471,7 +484,6 @@ public class CharacterController : MonoBehaviour
         jumpingForce = Vector3.up * playerSettings.JumpingHeight;
         playerGravity = 0;
         currentWeapon.TriggerJump();
-        //currentWeaponKnife.TriggerJump();
     }
 
     #endregion

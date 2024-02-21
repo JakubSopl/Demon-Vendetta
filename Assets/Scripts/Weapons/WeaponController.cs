@@ -103,9 +103,12 @@ public class WeaponController : MonoBehaviour
     [HideInInspector]
     public bool isShooting;
 
+    [HideInInspector]
+    public bool isSprinting;
 
 
-    
+
+
 
     #region - Start / Update / Awake -
 
@@ -158,7 +161,7 @@ public class WeaponController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading) Reload();
       
         //Shoot
-        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+        if (readyToShoot && shooting && !reloading && bulletsLeft > 0 && characterController.isSprinting == false)
         {
             bulletsShot = bulletsPerTap;
             Shoot();
