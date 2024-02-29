@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2210214186267272143}
   m_LocalRotation: {x: -0, y: 0.6978221, z: -0, w: 0.7162712}
-  m_LocalPosition: {x: -45.469, y: 10.169, z: -69.995}
+  m_LocalPosition: {x: -45.489, y: 10.169, z: -69.995}
   m_LocalScale: {x: 0.6359672, y: 1.4861, z: 1.4861}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -147,7 +147,6 @@ MonoBehaviour:
   speed: 20
   lifeTime: 10
   damage: 10
-  shooter: {fileID: 0}
 --- !u!54 &7301362053755731866
 Rigidbody:
   m_ObjectHideFlags: 0
