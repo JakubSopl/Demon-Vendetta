@@ -3723,7 +3723,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10, y: -9.1}
+  m_AnchoredPosition: {x: -2, y: 2}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &916440425
@@ -4178,7 +4178,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483647
   muzzleFlash: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4, type: 3}
-  bulletHoleGraphic: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
+  bulletHoleGraphic: {fileID: 1000010844420130, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
   text: {fileID: 788330576}
   isAimingIn: 0
   isShooting: 0
@@ -5563,7 +5563,7 @@ MonoBehaviour:
   timeBetweenShooting: 1
   spread: 0
   range: 150
-  reloadTime: 0.7
+  reloadTime: 1
   timeBetweenShots: 0.2
   magazineSize: 7
   bulletsPerTap: 1
@@ -5574,7 +5574,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483647
   muzzleFlash: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4, type: 3}
-  bulletHoleGraphic: {fileID: 1000013169864706, guid: e5a3d6da48298a0458c1990f58c27069, type: 3}
+  bulletHoleGraphic: {fileID: 1000010844420130, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
   text: {fileID: 788330576}
   isAimingIn: 0
   isShooting: 0
